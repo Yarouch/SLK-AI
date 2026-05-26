@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI pro komunální politiku — SLP 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root{
+  --P:#4B3FA0;--PL:#7B6FD0;--PP:#EEEDFE;--P2:#CECBF6;
+  --K:#D4537E;--KP:#FBEAF0;
+  --D:#16142B;--M:#46436A;--Q:#928FA8;
+  --B:rgba(75,63,160,.11);--BG:#F7F6FF;--W:#fff;
+  --GP:#EAF5EE;--G:#1B6E3A;
+  --AP:#FEF3E2;--A:#7A4F00;
+  --RP:#FEF0F0;--R:#8B2323;
+  --r:12px;--rs:8px;--rl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--BG);color:var(--D);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+strong{font-weight:500}
+
+/* ── NAV ── */
+#topnav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--B);
+  display:flex;align-items:stretch;
+  padding:0 20px;gap:0;
+}
+.nav-brand{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:14px;
+  color:var(--P);display:flex;align-items:center;gap:6px;
+  margin-right:auto;padding:14px 0;letter-spacing:-.01em;white-space:nowrap;
+}
+.nav-brand span{color:var(--K)}
+.nav-pill{
+  display:flex;align-items:center;gap:5px;
+  padding:0 14px;font-size:12.5px;font-weight:500;
+  color:var(--Q);cursor:pointer;border:none;background:none;
+  font-family:'DM Sans',sans-serif;
+  border-bottom:2.5px solid transparent;
+  transition:color .18s,border-color .18s;white-space:nowrap;
+}
+.nav-pill:hover{color:var(--P)}
+.nav-pill.on{color:var(--P);border-bottom-color:var(--P)}
+.nav-pill .npnum{
+  background:var(--PP);color:var(--P);
+  font-size:10px;font-weight:700;
+  padding:1px 6px;border-radius:100px;
+}
+.nav-pill.on .npnum{background:var(--P);color:#fff}
+
+/* ── PAGES ── */
+.pg{display:none}.pg.on{display:block}
+
+/* ── HERO ── */
+.hero{
+  background:var(--P);
+  padding:64px 24px 56px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero-dot{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.05);
+}
+.hero-dot.a{width:360px;height:360px;top:-100px;right:-80px}
+.hero-dot.b{width:240px;height:240px;bottom:-60px;left:-60px;background:rgba(212,83,126,.18)}
+.hero-dot.c{width:120px;height:120px;top:30px;left:40px;background:rgba(255,255,255,.04)}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.13);color:rgba(255,255,255,.88);
+  font-size:11.5px;font-weight:500;padding:5px 14px;
+  border-radius:100px;margin-bottom:22px;letter-spacing:.04em;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(30px,6vw,50px);color:#fff;
+  line-height:1.1;margin-bottom:14px;letter-spacing:-.025em;
+}
+.hero h1 em{color:#F4C0D1;font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.72);max-width:500px;margin:0 auto 32px;font-weight:300}
+.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.btn-hero{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 24px;border-radius:100px;
+  font-size:14px;font-weight:500;cursor:pointer;
+  border:none;font-family:'DM Sans',sans-serif;
+  transition:all .18s;text-decoration:none;
+}
+.btn-hero.primary{background:var(--K);color:#fff}
+.btn-hero.primary:hover{background:#BD3D6A;transform:translateY(-1px)}
+.btn-hero.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.btn-hero.ghost:hover{background:rgba(255,255,255,.2)}
+
+/* ── OVERVIEW CARDS ── */
+.overview{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;padding:32px 24px;max-width:800px;margin:0 auto;
+}
+.ov-card{
+  background:var(--W);border:1px solid var(--B);
+  border-radius:var(--r);padding:20px;
+  cursor:pointer;transition:border-color .18s,transform .18s;
+}
+.ov-card:hover{border-color:var(--PL);transform:translateY(-2px)}
+.ov-num{
+  width:32px;height:32px;border-radius:9px;
+  background:var(--PP);color:var(--P);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.ov-card h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--D);margin-bottom:4px}
+.ov-card p{font-size:12px;color:var(--Q);line-height:1.5}
+.ov-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--AP);color:var(--A);
+  font-size:11px;font-weight:500;padding:3px 8px;
+  border-radius:100px;margin-top:8px;
+}
+
+/* ── CONTAINER ── */
+.wrap{max-width:740px;margin:0 auto;padding:0 24px}
+.sec{padding:44px 0}.sec+.sec{border-top:1px solid var(--B)}
+
+/* ── LESSON ── */
+.lh{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.ln{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--P);color:#fff;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.lt{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--D);line-height:1.3}
+.ls{font-size:12.5px;color:var(--Q);margin-top:2px}
+.lb{font-size:15px;color:var(--M);line-height:1.8}
+.lb p{margin-bottom:12px}.lb p:last-child{margin:0}
+
+/* progress steps */
+.psteps{display:flex;margin:28px 0}
+.ps{
+  flex:1;text-align:center;padding:14px 8px;
+  border:1px solid var(--B);background:var(--W);
+  font-size:11.5px;color:var(--Q);line-height:1.4;
+}
+.ps:first-child{border-radius:var(--rs) 0 0 var(--rs)}
+.ps:last-child{border-radius:0 var(--rs) var(--rs) 0}
+.ps:not(:first-child){border-left:none}
+.ps.hi{background:var(--PP);color:var(--P)}
+.psn{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(0,0,0,.08);color:var(--Q);
+  font-size:11px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 5px;
+}
+.ps.hi .psn{background:var(--P);color:#fff}
+.psname{font-weight:500}.psmin{font-size:10.5px;opacity:.7}
+
+/* formula */
+.fbox{
+  background:var(--W);border:1px solid var(--B);
+  border-radius:var(--r);padding:20px 24px;margin:20px 0;
+}
+.flabel{font-size:10.5px;font-weight:600;letter-spacing:.09em;color:var(--Q);text-transform:uppercase;margin-bottom:10px}
+.fform{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--P);line-height:1.5}
+.fform .sep{color:var(--Q);font-weight:400;margin:0 8px}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.cc{border-radius:var(--rs);padding:14px 16px;font-size:13px;line-height:1.65}
+.cc.bad{background:var(--RP);border:1px solid rgba(139,35,35,.15);color:#5A1A1A}
+.cc.ok{background:var(--GP);border:1px solid rgba(27,110,58,.18);color:#1A4228}
+.cclabel{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+.cc.bad .cclabel{color:var(--R)}.cc.ok .cclabel{color:var(--G)}
+
+/* callout */
+.co{
+  border-radius:var(--rs);padding:13px 17px;
+  margin:18px 0;font-size:13.5px;line-height:1.65;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.co.tip{background:var(--PP);color:var(--P)}
+.co.ok{background:var(--GP);color:var(--G)}
+.co.warn{background:var(--AP);color:var(--A)}
+.co-i{font-size:17px;flex-shrink:0;margin-top:1px}
+
+/* task */
+.task{
+  background:var(--W);border:1.5px solid var(--PL);
+  border-radius:var(--r);padding:22px 24px;margin:24px 0;
+}
+.th2{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.tbadge{background:var(--P);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:100px}
+.ttime{font-size:12px;color:var(--Q);margin-left:auto}
+.ttitle{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--D);margin-bottom:8px}
+.tdesc{font-size:13.5px;color:var(--M);margin-bottom:14px;line-height:1.65}
+.tprompt{
+  background:var(--PP);border-radius:var(--rs);
+  padding:14px 16px;font-size:13px;color:var(--P);
+  line-height:1.75;white-space:pre-wrap;
+  font-family:'DM Sans',sans-serif;margin-bottom:14px;
+}
+.tprompt .blank{background:var(--PL);color:#fff;padding:1px 8px;border-radius:4px;font-weight:500}
+.tbtn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--P);color:#fff;padding:8px 18px;
+  border-radius:100px;font-size:13px;font-weight:500;
+  cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+  transition:background .18s;text-decoration:none;
+}
+.tbtn:hover{background:#3A3080}
+.tbtn.sec{background:transparent;color:var(--P);border:1.5px solid var(--PL);margin-left:8px}
+.tbtn.sec:hover{background:var(--PP)}
+
+/* ── 10 PROMPTS ── */
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.fb{
+  padding:5px 14px;border-radius:100px;
+  border:1px solid var(--B);font-size:12px;font-weight:500;
+  cursor:pointer;background:transparent;color:var(--Q);
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.fb:hover{border-color:var(--PL)}
+.fb.on{background:var(--PP);border-color:var(--P);color:var(--P)}
+.pcount{font-size:12px;color:var(--Q);margin-bottom:14px}
+
+.pcard{
+  background:var(--W);border:0.5px solid var(--B);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .15s;margin-bottom:10px;
+}
+.pcard:hover{border-color:rgba(75,63,160,.3)}
+.pcard.hide{display:none}
+.ph{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;cursor:pointer;user-select:none;
+}
+.ph:hover{background:rgba(75,63,160,.03)}
+.pnum{
+  min-width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;flex-shrink:0;margin-top:1px;
+}
+.np{background:var(--PP);color:var(--P)}
+.nt{background:var(--GP);color:#085041}
+.nc{background:var(--KP);color:#72243E}
+.na{background:var(--AP);color:var(--A)}
+.pm{flex:1}
+.ptitle{font-size:14px;font-weight:500;color:var(--D);margin-bottom:3px;line-height:1.4}
+.pmeta{font-size:11.5px;color:var(--Q)}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:100px;font-size:10.5px;font-weight:500;margin-right:3px}
+.tk{background:var(--PP);color:var(--P)}
+.tz{background:var(--GP);color:#085041}
+.tc{background:var(--KP);color:#72243E}
+.tpr{background:var(--AP);color:var(--A)}
+.chv{color:var(--Q);font-size:15px;margin-top:5px;transition:transform .2s;flex-shrink:0}
+.chv.op{transform:rotate(180deg)}
+.pb{display:none;border-top:0.5px solid var(--B);padding:16px}
+.pb.op{display:block}
+.pbox{
+  background:var(--BG);border-radius:var(--rs);
+  padding:14px 16px;font-size:13px;color:var(--D);
+  line-height:1.75;white-space:pre-wrap;
+  font-family:'DM Sans',sans-serif;margin-bottom:12px;
+}
+.pvar{color:var(--P);font-weight:500}
+.pcopy-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.phint{font-size:12px;color:var(--Q);display:flex;align-items:center;gap:5px}
+.copybtn{
+  padding:6px 14px;border:0.5px solid var(--B);
+  border-radius:var(--rs);font-size:12px;cursor:pointer;
+  background:transparent;color:var(--D);
+  font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:5px;transition:background .15s;
+}
+.copybtn:hover{background:var(--BG)}
+.phintbox{
+  background:var(--PP);border-radius:var(--rs);
+  padding:10px 14px;margin-top:10px;
+  font-size:12.5px;color:var(--P);line-height:1.6;
+  display:flex;gap:8px;
+}
+
+/* ── QUIZ ── */
+.qwrap{padding:32px 0}
+.qbar{height:3px;background:var(--B);border-radius:100px;margin-bottom:28px;overflow:hidden}
+.qfill{height:3px;background:var(--P);border-radius:100px;transition:width .4s ease}
+.qstep{display:none}.qstep.on{display:block}
+.qq{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--D);margin-bottom:6px;line-height:1.35}
+.qhint{font-size:13px;color:var(--Q);margin-bottom:18px}
+.olist{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.oitem{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border:1px solid var(--B);
+  border-radius:var(--rs);cursor:pointer;font-size:14px;
+  color:var(--D);background:var(--W);transition:all .15s;
+}
+.oitem:hover{border-color:var(--PL);background:var(--PP)}
+.oitem.sel{border-color:var(--P);background:var(--PP);color:var(--P)}
+.oitem input{display:none}
+.odot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--B);flex-shrink:0;transition:all .15s}
+.oitem.sel .odot{background:var(--P);border-color:var(--P)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{
+  padding:7px 15px;border:1px solid var(--B);
+  border-radius:100px;font-size:13px;color:var(--M);
+  cursor:pointer;background:var(--W);transition:all .15s;
+  font-family:'DM Sans',sans-serif;
+}
+.chip:hover{border-color:var(--PL)}
+.chip.sel{background:var(--PP);border-color:var(--P);color:var(--P);font-weight:500}
+.qta{
+  width:100%;border:1px solid var(--B);border-radius:var(--rs);
+  padding:12px 16px;font-size:14px;font-family:'DM Sans',sans-serif;
+  color:var(--D);background:var(--W);resize:vertical;
+  min-height:100px;margin-bottom:20px;outline:none;
+  transition:border-color .15s;
+}
+.qta:focus{border-color:var(--P)}
+.qnav{display:flex;justify-content:space-between;align-items:center}
+.qct{font-size:12px;color:var(--Q)}
+.qnext{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--P);color:#fff;padding:10px 22px;
+  border-radius:100px;font-size:14px;font-weight:500;
+  cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+  transition:background .2s;
+}
+.qnext:hover{background:#3A3080}
+.qnext:disabled{opacity:.45;cursor:not-allowed}
+.qback{
+  background:transparent;color:var(--Q);border:none;
+  font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  padding:8px 0;visibility:hidden;
+}
+.qback.show{visibility:visible}
+.qstatus{display:none;border-radius:var(--rs);padding:11px 16px;font-size:13px;margin-bottom:16px}
+.qstatus.sending{background:var(--PP);color:var(--P);display:block}
+.qstatus.err{background:var(--RP);color:var(--R);display:block}
+
+/* result */
+.rcard{background:var(--W);border:1px solid var(--B);border-radius:var(--r);overflow:hidden;margin-top:10px}
+.rhead{background:var(--P);padding:20px 24px;display:flex;align-items:center;gap:12px}
+.ric{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.rtitle{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff}
+.rsub{font-size:12.5px;color:rgba(255,255,255,.7);margin-top:2px}
+.rrows{padding:0 24px}
+.rrow{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--B);font-size:13px;gap:16px}
+.rrow:last-child{border:none}
+.rlabel{color:var(--Q);flex-shrink:0}
+.rval{color:var(--D);font-weight:500;text-align:right}
+.racts{padding:16px 24px 20px;display:flex;gap:10px;flex-wrap:wrap}
+.rcopy{
+  flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--P);color:#fff;padding:10px 20px;
+  border-radius:100px;font-size:13px;font-weight:500;
+  cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:background .2s;
+}
+.rcopy:hover{background:#3A3080}
+.rreset{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;color:var(--Q);padding:10px 16px;
+  border-radius:100px;font-size:13px;cursor:pointer;
+  border:1px solid var(--B);font-family:'DM Sans',sans-serif;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--D);color:rgba(255,255,255,.45);
+  text-align:center;padding:32px 24px;font-size:12px;
+  margin-top:64px;
+}
+footer strong{color:rgba(255,255,255,.8)}
+footer a{color:rgba(255,255,255,.6);text-decoration:none}
+footer a:hover{color:#fff}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.footer-logo span{color:#F4C0D1}
+
+/* ── UTILS ── */
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+.seclabel{font-size:10.5px;font-weight:700;letter-spacing:.09em;color:var(--Q);text-transform:uppercase;margin:1.5rem 0 .75rem}
+
+@media(max-width:540px){
+  .cmp{grid-template-columns:1fr}
+  .nav-pill{padding:0 10px;font-size:11.5px}
+  .nav-brand{font-size:13px}
+  .psteps{flex-direction:column}
+  .ps:first-child{border-radius:var(--rs) var(--rs) 0 0}
+  .ps:last-child{border-radius:0 0 var(--rs) var(--rs)}
+  .ps:not(:first-child){border-left:1px solid var(--B);border-top:none}
+  .overview{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="topnav">
+  <div class="nav-brand">SLP <span>×</span> AI</div>
+  <button class="nav-pill on" onclick="go('home',this)">🏠 Úvod</button>
+  <button class="nav-pill" onclick="go('learn',this)">📖 Jak promptovat</button>
+  <button class="nav-pill" onclick="go('prompts',this)">⚡ <span class="npnum">10</span> promptů</button>
+  <button class="nav-pill" onclick="go('survey',this)">📋 Dotazník</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE: HOME -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="pg on" id="pg-home">
+
+<div class="hero">
+  <div class="hero-dot a"></div><div class="hero-dot b"></div><div class="hero-dot c"></div>
+  <div class="hero-chip">🗳 Komunální volby 2026 · Liberec</div>
+  <h1>AI pro<br><em>komunální politiku</em></h1>
+  <p class="hero-sub">Kompletní kurz pro tým Starostové pro Liberec. 15 minut samostudia, 10 promptů ke stažení, dotazník před workshopem.</p>
+  <div class="hero-actions">
+    <button class="btn-hero primary" onclick="go('learn',document.querySelectorAll('.nav-pill')[1])">Začít kurz →</button>
+    <button class="btn-hero ghost" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">Vyplnit dotazník</button>
+  </div>
+</div>
+
+<div class="overview">
+  <div class="ov-card" onclick="go('learn',document.querySelectorAll('.nav-pill')[1])">
+    <div class="ov-num">1</div>
+    <h3>Jak promptovat</h3>
+    <p>Úvod pro začátečníky, 4 pravidla a 3 praktická cvičení</p>
+    <div class="ov-badge">⏱ 15 minut</div>
+  </div>
+  <div class="ov-card" onclick="go('prompts',document.querySelectorAll('.nav-pill')[2])">
+    <div class="ov-num">2</div>
+    <h3>10 promptů</h3>
+    <p>Hotové šablony pro kampaň, zastupitelstvo, program i krizovku</p>
+    <div class="ov-badge">📋 Kopírovat a použít</div>
+  </div>
+  <div class="ov-card" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">
+    <div class="ov-num">3</div>
+    <h3>Dotazník</h3>
+    <p>5 otázek před workshopem — pomůže přizpůsobit program</p>
+    <div class="ov-badge">⏱ 2 minuty</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="sec">
+    <p class="seclabel">Pro koho je tento kurz</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+      <div style="background:var(--W);border:1px solid var(--B);border-radius:var(--r);padding:18px">
+        <div style="font-size:22px;margin-bottom:8px">🏛</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--D);margin-bottom:5px">Zastupitelé a kandidáti</div>
+        <div style="font-size:13px;color:var(--Q);line-height:1.55">Příprava na jednání, reakce na média, rozvoj programu</div>
+      </div>
+      <div style="background:var(--W);border:1px solid var(--B);border-radius:var(--r);padding:18px">
+        <div style="font-size:22px;margin-bottom:8px">📱</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--D);margin-bottom:5px">Koordinátoři kampaně</div>
+        <div style="font-size:13px;color:var(--Q);line-height:1.55">Obsah na sítě, letáky, e-maily, tiskové zprávy</div>
+      </div>
+      <div style="background:var(--W);border:1px solid var(--B);border-radius:var(--r);padding:18px">
+        <div style="font-size:22px;margin-bottom:8px">🤝</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--D);margin-bottom:5px">Dobrovolníci</div>
+        <div style="font-size:13px;color:var(--Q);line-height:1.55">Rychlá pomoc s texty, překlady a přípravou podkladů</div>
+      </div>
+    </div>
+    <div class="co tip mt16">
+      <span class="co-i">💡</span>
+      <div>Kurz nevyžaduje žádné technické znalosti. Potřebuješ jen telefon nebo počítač a bezplatný účet na <strong>claude.ai</strong> nebo <strong>chat.openai.com</strong>.</div>
+    </div>
+  </div>
+</div>
+</div><!-- /pg-home -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE: LEARN -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-learn">
+<div class="hero">
+  <div class="hero-dot a"></div><div class="hero-dot b"></div>
+  <div class="hero-chip">📖 Samostudium · Přečti si před workshopem</div>
+  <h1>Jak psát<br><em>dobré prompty</em></h1>
+  <p class="hero-sub">Průvodce pro naprosté začátečníky. Tři lekce, tři cvičení — 15 minut.</p>
+  <button class="btn-hero primary" onclick="document.getElementById('ls').scrollIntoView({behavior:'smooth'})">Začít číst →</button>
+</div>
+
+<div class="wrap" id="ls">
+  <div class="sec">
+    <div class="psteps">
+      <div class="ps hi"><div class="psn">1</div><div class="psname">Co je prompt</div><div class="psmin">3 min</div></div>
+      <div class="ps hi"><div class="psn">2</div><div class="psname">4 pravidla</div><div class="psmin">5 min</div></div>
+      <div class="ps hi"><div class="psn">3</div><div class="psname">3 cvičení</div><div class="psmin">7 min</div></div>
+    </div>
+
+    <!-- L1 -->
+    <div class="lh">
+      <div class="ln">1</div>
+      <div><div class="lt">Co je to prompt — a proč na tom záleží</div><div class="ls">⏱ 3 minuty čtení</div></div>
+    </div>
+    <div class="lb">
+      <p>Prompt je jednoduše <strong>to, co napíšeš AI</strong>. Jako když zadáváš dotaz do Googlu — jenže AI nevrátí seznam odkazů, ale přímo odpoví, napíše text nebo vyřeší problém.</p>
+      <p>Klíčový rozdíl: Google pochopí „oprava silnic Liberec". AI pochopí celou větu: <em>„Napiš mi post na Facebook o tom, že chceme opravit silnice v Liberci — tón přátelský, max 80 slov."</em></p>
+      <p>Čím přesnější otázka, tím lepší odpověď. To je celé tajemství promptování.</p>
+    </div>
+    <div class="co tip">
+      <span class="co-i">💡</span>
+      <div>AI není vyhledávač ani kouzelná krabice. Je to <strong>velmi schopný kolega</strong>, kterému musíš říct, co přesně chceš — stejně jako skutečnému copywriterovi nebo analytikovi.</div>
+    </div>
+  </div>
+
+  <!-- L2 -->
+  <div class="sec">
+    <div class="lh">
+      <div class="ln">2</div>
+      <div><div class="lt">4 pravidla dobrého promptu</div><div class="ls">⏱ 5 minut čtení</div></div>
+    </div>
+    <div class="fbox">
+      <div class="flabel">Základní vzorec</div>
+      <div class="fform">Role<span class="sep">+</span>Úkol<span class="sep">+</span>Kontext<span class="sep">+</span>Formát</div>
+    </div>
+    <div class="lb">
+      <p><strong>Role</strong> — řekni AI, koho má hrát: „Jsi zkušený volební copywriter." AI se okamžitě přizpůsobí stylu a úrovni.</p>
+      <p><strong>Úkol</strong> — přesně popiš, co chceš: „Napiš medailonek kandidáta." Ne vágní „pomoz mi s textem."</p>
+      <p><strong>Kontext</strong> — dej AI informace, které potřebuje: jméno, téma, cílová skupina, co chceme zdůraznit.</p>
+      <p><strong>Formát</strong> — řekni, jak má výstup vypadat: „max 80 slov", „3 varianty", „bez politického žargonu", „odrážky".</p>
+    </div>
+    <div class="cmp">
+      <div class="cc bad"><div class="cclabel">❌ Slabý prompt</div>Napiš něco o školství v Liberci.</div>
+      <div class="cc ok"><div class="cclabel">✅ Silný prompt</div>Jsi volební copywriter. Napiš 3 věty pro FB post o tom, že plánujeme otevřít novou školku v Rochlicích. Tón: radostný, teplý. Zmíň dostupná místa od září 2027.</div>
+    </div>
+    <div class="cmp">
+      <div class="cc bad"><div class="cclabel">❌ Slabý prompt</div>Pomoz mi s odpovědí na kritiku.</div>
+      <div class="cc ok"><div class="cclabel">✅ Silný prompt</div>Jsi expert na krizovou komunikaci. Napiš 3 varianty odpovědi na tento koment: „SLP nic neudělali pro dopravu." — věcná, empatická, sebevědomá. Max 2 věty každá.</div>
+    </div>
+    <div class="co warn">
+      <span class="co-i">⚠️</span>
+      <div><strong>Nedávej AI osobní data občanů</strong> (jména, adresy, čísla). Texty programu, vlastní životopis nebo věty z letáku jsou v pořádku.</div>
+    </div>
+    <div class="co ok">
+      <span class="co-i">✅</span>
+      <div><strong>Výsledek není dobrý? Uprav prompt.</strong> Přidej víc kontextu, zpřesni formát, změn roli. Druhý pokus bývá výrazně lepší.</div>
+    </div>
+  </div>
+
+  <!-- L3 -->
+  <div class="sec">
+    <div class="lh">
+      <div class="ln">3</div>
+      <div><div class="lt">3 cvičení — vyzkoušej to sám/sama</div><div class="ls">⏱ 7 minut · Potřebuješ bezplatný účet na claude.ai nebo chat.openai.com</div></div>
+    </div>
+
+    <div class="task">
+      <div class="th2"><span class="tbadge">CVIČENÍ 1</span><span class="ttime">⏱ 2 min</span></div>
+      <div class="ttitle">Napiš o sobě medailonek</div>
+      <div class="tdesc">Zkopíruj prompt, doplň informace o sobě a vlož do Claude nebo ChatGPT. Podívej se na výsledek — a zkus ho ještě jednou s jiným upřesněním.</div>
+      <div class="tprompt">Jsi volební copywriter. Napiš krátký medailonek kandidáta pro Facebook.
+
+Jméno: <span class="blank">[tvoje jméno]</span>
+Profese: <span class="blank">[co děláš]</span>
+Proč kandiduji: <span class="blank">[jedna věta]</span>
+
+Pravidla: max 60 slov, první osoba, teplý tón, bez fráze „angažovaný" nebo „zodpovědný".</div>
+      <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
+      <button class="tbtn sec" onclick="cp(this,'Jsi volební copywriter. Napiš krátký medailonek kandidáta pro Facebook.\n\nJméno: [tvoje jméno]\nProfese: [co děláš]\nProč kandiduji: [jedna věta]\n\nPravidla: max 60 slov, první osoba, teplý tón, bez fráze „angažovaný" nebo „zodpovědný".')">📋 Kopírovat prompt</button>
+    </div>
+
+    <div class="task">
+      <div class="th2"><span class="tbadge">CVIČENÍ 2</span><span class="ttime">⏱ 3 min</span></div>
+      <div class="ttitle">Zjednodušení složitého textu</div>
+      <div class="tdesc">Vezmi jakýkoliv odstavec z volebního programu nebo úředního dokumentu a dej ho AI přepsat pro běžného voliče.</div>
+      <div class="tprompt">Přepiš tento text tak, aby mu rozuměl každý — rodič, živnostník, senior. Žádný úřednický jazyk.
+
+Text: <span class="blank">[vlož odstavec z programu nebo dokumentu]</span>
+
+Výstup: max 3 věty. První věta říká, co z toho má občan Liberce. Poslední věta musí být pozitivní.</div>
+      <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
+      <button class="tbtn sec" onclick="cp(this,'Přepiš tento text tak, aby mu rozuměl každý — rodič, živnostník, senior. Žádný úřednický jazyk.\n\nText: [vlož odstavec z programu nebo dokumentu]\n\nVýstup: max 3 věty. První věta říká, co z toho má občan Liberce. Poslední věta musí být pozitivní.')">📋 Kopírovat prompt</button>
+    </div>
+
+    <div class="task">
+      <div class="th2"><span class="tbadge">CVIČENÍ 3</span><span class="ttime">⏱ 2 min · Bonusové</span></div>
+      <div class="ttitle">Nech AI hrát skeptického voliče</div>
+      <div class="tdesc">AI nasimuluje kritiku — připravíš se lépe na reálné komentáře. Pokud tě výsledek překvapí, jsi na správné cestě.</div>
+      <div class="tprompt">Jsi skeptický liberecký volič, 55 let, řidič autobusu. Přečetl sis tento programový bod:
+
+<span class="blank">[vlož jeden programový bod SLP]</span>
+
+Napiš 3 kritické komentáře, které by takový člověk napsal na Facebook. Buď realistický, ne hysterický.</div>
+      <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
+      <button class="tbtn sec" onclick="cp(this,'Jsi skeptický liberecký volič, 55 let, řidič autobusu. Přečetl sis tento programový bod:\n\n[vlož jeden programový bod SLP]\n\nNapiš 3 kritické komentáře, které by takový člověk napsal na Facebook. Buď realistický, ne hysterický.')">📋 Kopírovat prompt</button>
+    </div>
+
+    <div class="co tip">
+      <span class="co-i">🎯</span>
+      <div>Hotovo? Na workshopu tě čeká live demo — příprava na zastupitelstvo, skript pro Reels i krizová komunikace. Mrkni mezitím na záložku <strong>10 promptů</strong>.</div>
+    </div>
+    <div style="text-align:center;margin-top:28px">
+      <button class="btn-hero primary" onclick="go('prompts',document.querySelectorAll('.nav-pill')[2])">Přejít na 10 promptů →</button>
+    </div>
+  </div>
+</div>
+</div><!-- /pg-learn -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE: PROMPTS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-prompts">
+<div class="hero">
+  <div class="hero-dot a"></div><div class="hero-dot b"></div>
+  <div class="hero-chip">⚡ Knihovna promptů · Kopírovat a použít</div>
+  <h1>10 promptů pro<br><em>komunální politiku</em></h1>
+  <p class="hero-sub">Hotové šablony — doplň proměnné, vlož do Claude nebo ChatGPT a máš výsledek za 30 sekund.</p>
+</div>
+
+<div class="wrap" style="padding-top:32px">
+  <div class="filter-bar">
+    <button class="fb on" onclick="pfilter('all',this)">Vše</button>
+    <button class="fb" onclick="pfilter('k',this)">Kampaň</button>
+    <button class="fb" onclick="pfilter('z',this)">Zastupitelstvo</button>
+    <button class="fb" onclick="pfilter('p',this)">Program</button>
+    <button class="fb" onclick="pfilter('c',this)">Krizová kom.</button>
+  </div>
+  <p class="pcount" id="pct">Zobrazuji 10 z 10 promptů</p>
+
+  <!-- PROMPT 1 -->
+  <div class="pcard" data-c="k">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum np">1</span>
+      <div class="pm">
+        <div class="ptitle">Medailonek kandidáta — 3 verze</div>
+        <div class="pmeta"><span class="tag tk">Kampaň</span> Facebook · Leták · Web</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi zkušený volební copywriter. Napiš medailonek kandidáta ve 3 verzích:
+— Facebook post (max 80 slov, teplý tón, první osoba)
+— Text na leták (max 50 slov, třetí osoba, důraz na přínos pro město)
+— Bio na web (max 120 slov, profesionální, zmíň klíčové zkušenosti)
+
+Podklady:
+<span class="pvar">[Jméno, profese, věk, proč kandiduje, co chce změnit, osobní příběh]</span>
+
+Tón: přátelský, důvěryhodný. Nepoužívej slova: angažovaný, zodpovědný, transparentní.</div>
+      <div class="phintbox">💡 Přidej „Nepoužívej:" — AI se slovům vyhne a texty budou čerstvější.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 1 proměnnou</span>
+        <button class="copybtn" onclick="cp(this,'Jsi zkušený volební copywriter. Napiš medailonek kandidáta ve 3 verzích:\n— Facebook post (max 80 slov, teplý tón, první osoba)\n— Text na leták (max 50 slov, třetí osoba, důraz na přínos pro město)\n— Bio na web (max 120 slov, profesionální, zmíň klíčové zkušenosti)\n\nPodklady:\n[Jméno, profese, věk, proč kandiduje, co chce změnit, osobní příběh]\n\nTón: přátelský, důvěryhodný. Nepoužívej slova: angažovaný, zodpovědný, transparentní.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 2 -->
+  <div class="pcard" data-c="k">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum np">2</span>
+      <div class="pm">
+        <div class="ptitle">Týdenní plán obsahu na sociální sítě</div>
+        <div class="pmeta"><span class="tag tk">Kampaň</span> Instagram · Facebook · TikTok</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi social media manažer komunální volební kampaně. Vytvoř obsahový plán na 7 dní pro Starostové pro Liberec.
+
+Téma týdne: <span class="pvar">[Školství / Doprava / Bezpečnost / jiné]</span>
+Hlavní sdělení: <span class="pvar">[klíčový slogan nebo příslib kampaně]</span>
+
+Pro každý den navrhni:
+— Typ příspěvku (foto, video, text, story, reel)
+— Headline (max 10 slov)
+— Caption (max 150 slov)
+— Hashtags (max 5, lokální + tematické)
+— Doporučený čas zveřejnění
+
+Střídej edukaci, příběh a výzvu k akci.</div>
+      <div class="phintbox">💡 Řekni AI, co jsi zveřejnil minulý týden — dostaneš různorodější mix bez opakování.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 2 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Jsi social media manažer komunální volební kampaně. Vytvoř obsahový plán na 7 dní pro Starostové pro Liberec.\n\nTéma týdne: [Školství / Doprava / Bezpečnost / jiné]\nHlavní sdělení: [klíčový slogan nebo příslib kampaně]\n\nPro každý den navrhni:\n— Typ příspěvku (foto, video, text, story, reel)\n— Headline (max 10 slov)\n— Caption (max 150 slov)\n— Hashtags (max 5, lokální + tematické)\n— Doporučený čas zveřejnění\n\nStřídej edukaci, příběh a výzvu k akci.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 3 -->
+  <div class="pcard" data-c="c">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum nc">3</span>
+      <div class="pm">
+        <div class="ptitle">Reakce na negativní koment nebo útok</div>
+        <div class="pmeta"><span class="tag tc">Krizová kom.</span> 3 strategie odpovědi</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi expert na krizovou komunikaci v komunální politice. Pomoz mi reagovat na tento koment:
+
+<span class="pvar">[Vlož sem doslova koment, tweet nebo zprávu z médií]</span>
+
+Kontext: Jsem kandidát za Starostové pro Liberec, téma se týká <span class="pvar">[oblast: doprava / školy / rozpočet…]</span>.
+
+Navrhni 3 různé odpovědi:
+1. Věcná — fakta, bez emocí, krátce
+2. Empatická — uznám legitimní obavy, nabídnu řešení
+3. Sebevědomá — držím pozici, neomluvám se
+
+Každá max 3 věty. Žádný útok na autora.</div>
+      <div class="phintbox">💡 Vždy uprav výsledek vlastními slovy — AI dá strukturu, ty dodáš autenticitu.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 2 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Jsi expert na krizovou komunikaci v komunální politice. Pomoz mi reagovat na tento koment:\n\n[Vlož sem doslova koment, tweet nebo zprávu z médií]\n\nKontext: Jsem kandidát za Starostové pro Liberec, téma se týká [oblast: doprava / školy / rozpočet…].\n\nNavrhni 3 různé odpovědi:\n1. Věcná — fakta, bez emocí, krátce\n2. Empatická — uznám legitimní obavy, nabídnu řešení\n3. Sebevědomá — držím pozici, neomluvám se\n\nKaždá max 3 věty. Žádný útok na autora.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 4 -->
+  <div class="pcard" data-c="z">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum nt">4</span>
+      <div class="pm">
+        <div class="ptitle">Příprava na zastupitelstvo — briefing z podkladů</div>
+        <div class="pmeta"><span class="tag tz">Zastupitelstvo</span> Klíčové body · Rizika · Otázky</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi analytik zastupitelstva města Liberec. Prostuduj přiložený materiál a připrav stručný briefing.
+
+<span class="pvar">[Vlož nebo nahraj text podkladového materiálu]</span>
+
+Strukturuj výstup takto:
+1. O čem se hlasuje (max 3 věty)
+2. Finanční dopady (pokud jsou)
+3. Rizika a otevřené otázky
+4. Argumenty PRO schválení
+5. Argumenty PROTI schválení
+6. Pět konkrétních otázek, které bych měl jako zastupitel položit
+
+Piš jasně, bez úřednického jazyka. Vše na max 1 stranu A4.</div>
+      <div class="phintbox">💡 Funguje nejlépe s naskenovaným PDF nebo zkopírovaným textem — Claude si poradí i s tabulkami.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 1 proměnnou</span>
+        <button class="copybtn" onclick="cp(this,'Jsi analytik zastupitelstva města Liberec. Prostuduj přiložený materiál a připrav stručný briefing.\n\n[Vlož nebo nahraj text podkladového materiálu]\n\nStrukturuj výstup takto:\n1. O čem se hlasuje (max 3 věty)\n2. Finanční dopady (pokud jsou)\n3. Rizika a otevřené otázky\n4. Argumenty PRO schválení\n5. Argumenty PROTI schválení\n6. Pět konkrétních otázek, které bych měl jako zastupitel položit\n\nPiš jasně, bez úřednického jazyka. Vše na max 1 stranu A4.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 5 -->
+  <div class="pcard" data-c="p">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum na">5</span>
+      <div class="pm">
+        <div class="ptitle">Zjednodušení programového textu pro voliče</div>
+        <div class="pmeta"><span class="tag tpr">Program</span> Z dokumentu na leták nebo post</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi politický komunikátor. Přepiš tento programový text tak, aby byl srozumitelný pro každého voliče — rodiče, živnostníka nebo seniora.
+
+Původní text:
+<span class="pvar">[Vlož odstavec z programu]</span>
+
+Pravidla:
+— Max 4 věty
+— Žádný žargon
+— Konkrétní přínos pro obyvatele Liberce v první větě
+— Zakončit větou vzbuzující naději nebo motivující k akci
+— Tón: přátelský, kompetentní
+
+Navrhni také headline (max 8 slov) pro nadpis letáku.</div>
+      <div class="phintbox">💡 Nech napsat 3 varianty — pak vyber tu, která nejlépe sedí tvé cílové skupině voličů.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 1 proměnnou</span>
+        <button class="copybtn" onclick="cp(this,'Jsi politický komunikátor. Přepiš tento programový text tak, aby byl srozumitelný pro každého voliče — rodiče, živnostníka nebo seniora.\n\nPůvodní text:\n[Vlož odstavec z programu]\n\nPravidla:\n— Max 4 věty\n— Žádný žargon\n— Konkrétní přínos pro obyvatele Liberce v první větě\n— Zakončit větou vzbuzující naději nebo motivující k akci\n— Tón: přátelský, kompetentní\n\nNavrhni také headline (max 8 slov) pro nadpis letáku.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 6 -->
+  <div class="pcard" data-c="z p">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum nt">6</span>
+      <div class="pm">
+        <div class="ptitle">Srovnání programů soupeřů</div>
+        <div class="pmeta"><span class="tag tz">Zastupitelstvo</span><span class="tag tpr">Program</span> Shody · Rozdíly · Slabiny</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi politický analytik. Srovnej tyto dva volební programy a identifikuj strategicky důležité rozdíly.
+
+Program SLP:
+<span class="pvar">[Vlož klíčové body programu SLP]</span>
+
+Program <span class="pvar">[název soupeře]</span>:
+<span class="pvar">[Vlož klíčové body programu soupeře]</span>
+
+Výstup:
+1. Kde se programy shodují (3–5 bodů)
+2. Klíčové rozdíly — kde SLP nabízí víc nebo jinak
+3. Témata, která soupeř má a SLP ne — slabiny nebo příležitosti?
+4. Jedno sdělení (max 2 věty) pro použití v debatě jako diferenciátor
+
+Buď neutrální analytik.</div>
+      <div class="phintbox">💡 Výsledek použij jako přípravu kandidáta na TV nebo novinářský rozhovor.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 3 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Jsi politický analytik. Srovnej tyto dva volební programy a identifikuj strategicky důležité rozdíly.\n\nProgram SLP:\n[Vlož klíčové body programu SLP]\n\nProgram [název soupeře]:\n[Vlož klíčové body programu soupeře]\n\nVýstup:\n1. Kde se programy shodují (3–5 bodů)\n2. Klíčové rozdíly — kde SLP nabízí víc nebo jinak\n3. Témata, která soupeř má a SLP ne — slabiny nebo příležitosti?\n4. Jedno sdělení (max 2 věty) pro použití v debatě jako diferenciátor\n\nBuď neutrální analytik.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 7 -->
+  <div class="pcard" data-c="k">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum np">7</span>
+      <div class="pm">
+        <div class="ptitle">Skript pro 60sekundové volební video</div>
+        <div class="pmeta"><span class="tag tk">Kampaň</span> Instagram Reels · TikTok · YouTube Short</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Napiš skript pro 60sekundové volební video pro sociální sítě.
+
+Kandidát: <span class="pvar">[Jméno, pár slov]</span>
+Téma: <span class="pvar">[konkrétní problém nebo příslib, např. „parkovací domy v centru"]</span>
+Cílová skupina: <span class="pvar">[rodiče / mladí / senioři / podnikatelé]</span>
+
+Struktura:
+— Hák (0–5 s): jedna provokativní otázka nebo překvapivý fakt
+— Problém (5–20 s): co konkrétně nefunguje dnes v Liberci
+— Řešení (20–45 s): co kandidát udělá — konkrétně a jednoduše
+— Výzva (45–60 s): proč volit a jak
+
+Přidej poznámky pro kameru: kde kandidát stojí, co dělá, co ukazuje.</div>
+      <div class="phintbox">💡 Nejsilnější videa začínají venku — u problémového místa, školy, zastávky.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 3 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Napiš skript pro 60sekundové volební video pro sociální sítě.\n\nKandidát: [Jméno, pár slov]\nTéma: [konkrétní problém nebo příslib]\nCílová skupina: [rodiče / mladí / senioři / podnikatelé]\n\nStruktura:\n— Hák (0–5 s): jedna provokativní otázka nebo překvapivý fakt\n— Problém (5–20 s): co konkrétně nefunguje dnes v Liberci\n— Řešení (20–45 s): co kandidát udělá — konkrétně a jednoduše\n— Výzva (45–60 s): proč volit a jak\n\nPřidej poznámky pro kameru: kde kandidát stojí, co dělá, co ukazuje.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 8 -->
+  <div class="pcard" data-c="c">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum nc">8</span>
+      <div class="pm">
+        <div class="ptitle">Tisková zpráva nebo vyjádření pro média</div>
+        <div class="pmeta"><span class="tag tc">Krizová kom.</span> Proaktivní · Reaktivní · Odpověď na kauzu</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi tiskový mluvčí komunální strany. Napiš tiskovou zprávu nebo vyjádření pro média.
+
+Situace: <span class="pvar">[Co se stalo nebo jaké téma komunikujeme]</span>
+Postoj SLP: <span class="pvar">[Naše pozice v 1–2 větách]</span>
+Kontakt: <span class="pvar">[Jméno, funkce, telefon]</span>
+
+Formát:
+— Titulek (věcný, max 12 slov)
+— Perex (co, kde, kdy, proč — 2 věty)
+— Tělo (fakta → naše reakce → co uděláme)
+— Citát zastupitele/kandidáta (1–2 věty, přímá řeč)
+— Kontakt na mluvčího
+
+Tón: klidný, věcný, konstruktivní. Bez útoků.</div>
+      <div class="phintbox">💡 Citát vždy přepiš vlastními slovy — novináři poznají, zda ho psal člověk nebo AI.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 3 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Jsi tiskový mluvčí komunální strany. Napiš tiskovou zprávu nebo vyjádření pro média.\n\nSituace: [Co se stalo nebo jaké téma komunikujeme]\nPostoj SLP: [Naše pozice v 1–2 větách]\nKontakt: [Jméno, funkce, telefon]\n\nFormát:\n— Titulek (věcný, max 12 slov)\n— Perex (co, kde, kdy, proč — 2 věty)\n— Tělo (fakta → naše reakce → co uděláme)\n— Citát zastupitele/kandidáta (1–2 věty, přímá řeč)\n— Kontakt na mluvčího\n\nTón: klidný, věcný, konstruktivní. Bez útoků.')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 9 -->
+  <div class="pcard" data-c="p">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum na">9</span>
+      <div class="pm">
+        <div class="ptitle">Rozvoj programového bodu — od ideje k realizaci</div>
+        <div class="pmeta"><span class="tag tpr">Program</span> Plán · Náklady · Voliččin příběh</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi senior poradce komunální politiky. Rozviň tento záměr do konkrétního realizovatelného návrhu.
+
+Záměr: <span class="pvar">[Stručně popiš myšlenku]</span>
+Město: Liberec (cca 104 000 obyvatel, krajské město)
+Volební období: 4 roky (2026–2030)
+
+Výstup:
+1. Problém, který řešíme — 2 věty s čísly
+2. Konkrétní kroky (co, kdo, kdy)
+3. Odhadované náklady a možné zdroje (dotace, rozpočet, partneři)
+4. Měřitelný výsledek do roku 2030
+5. Příběh pro kampaň — jak to vysvětlit voličce Janě (38 let, maminka, Liberec-Rochlice)</div>
+      <div class="phintbox">💡 Bod 5 — příběh pro Janu — je nejcennější část. Právě tato forma komunikace rozhoduje volby.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 1 proměnnou</span>
+        <button class="copybtn" onclick="cp(this,'Jsi senior poradce komunální politiky. Rozviň tento záměr do konkrétního realizovatelného návrhu.\n\nZáměr: [Stručně popiš myšlenku]\nMěsto: Liberec (cca 104 000 obyvatel, krajské město)\nVolební období: 4 roky (2026–2030)\n\nVýstup:\n1. Problém, který řešíme — 2 věty s čísly\n2. Konkrétní kroky (co, kdo, kdy)\n3. Odhadované náklady a možné zdroje (dotace, rozpočet, partneři)\n4. Měřitelný výsledek do roku 2030\n5. Příběh pro kampaň — jak to vysvětlit voličce Janě (38 let, maminka, Liberec-Rochlice)')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 10 -->
+  <div class="pcard" data-c="z c">
+    <div class="ph" onclick="ptog(this)">
+      <span class="pnum nt">10</span>
+      <div class="pm">
+        <div class="ptitle">Příprava na televizní nebo novinářský rozhovor</div>
+        <div class="pmeta"><span class="tag tz">Zastupitelstvo</span><span class="tag tc">Krizová kom.</span> Otázky · Bridging · Message of the day</div>
+      </div>
+      <span class="chv">▾</span>
+    </div>
+    <div class="pb">
+      <div class="pbox">Jsi mediální trenér s 20 lety zkušeností. Připrav mě na rozhovor pro lokální média.
+
+Téma rozhovoru: <span class="pvar">[Co bude novinář pravděpodobně řešit]</span>
+Silné stránky SLP v tomto tématu: <span class="pvar">[Co víme, co jsme udělali, co slibujeme]</span>
+Citlivá místa: <span class="pvar">[Co by mě mohlo zaskočit]</span>
+
+Výstup:
+1. 7 nejpravděpodobnějších otázek — včetně 3 nepříjemných
+2. Doporučená odpověď na každou (max 3 věty, jasně)
+3. Bridging fráze — 3 způsoby, jak přejít od těžké otázky k mému sdělení
+4. Message of the day (1 věta) — zopakuji ji 3× bez ohledu na otázku</div>
+      <div class="phintbox">💡 Nech AI hrát nepřátelského novináře a procvičuj odpovědi nahlas — skutečný rozhovor bude snazší.</div>
+      <div class="pcopy-row mt8">
+        <span class="phint">✏️ Doplň 3 proměnné</span>
+        <button class="copybtn" onclick="cp(this,'Jsi mediální trenér s 20 lety zkušeností. Připrav mě na rozhovor pro lokální média.\n\nTéma rozhovoru: [Co bude novinář pravděpodobně řešit]\nSilné stránky SLP v tomto tématu: [Co víme, co jsme udělali, co slibujeme]\nCitlivá místa: [Co by mě mohlo zaskočit]\n\nVýstup:\n1. 7 nejpravděpodobnějších otázek — včetně 3 nepříjemných\n2. Doporučená odpověď na každou (max 3 věty, jasně)\n3. Bridging fráze — 3 způsoby, jak přejít od těžké otázky k mému sdělení\n4. Message of the day (1 věta) — zopakuji ji 3× bez ohledu na otázku')">📋 Kopírovat</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:32px 0">
+    <button class="btn-hero primary" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">Přejít na dotazník →</button>
+  </div>
+</div>
+</div><!-- /pg-prompts -->
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE: SURVEY -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-survey">
+<div class="hero">
+  <div class="hero-dot a"></div><div class="hero-dot b"></div>
+  <div class="hero-chip">📋 Předworkshopový dotazník</div>
+  <h1>Řekni nám,<br><em>kde začínáš</em></h1>
+  <p class="hero-sub">5 otázek · 2 minuty · anonymní · výsledky přijdou organizátorovi e-mailem</p>
+</div>
+
+<div class="wrap">
+  <div class="qwrap">
+    <div class="qbar"><div class="qfill" id="qbar" style="width:20%"></div></div>
+    <div id="qstatus" class="qstatus"></div>
+
+    <!-- Q1 -->
+    <div class="qstep on" id="qs1">
+      <div class="qq">Jak často používáš AI nástroje?</div>
+      <div class="qhint">ChatGPT, Claude, Copilot, Gemini nebo podobné…</div>
+      <div class="olist">
+        <label class="oitem" onclick="so(this,'q1','never')"><span class="odot"></span><input type="radio" name="q1" value="never">Zatím jsem to nezkoušel/a</label>
+        <label class="oitem" onclick="so(this,'q1','rare')"><span class="odot"></span><input type="radio" name="q1" value="rare">Párkrát jsem zkusil/a, ale pravidelně ne</label>
+        <label class="oitem" onclick="so(this,'q1','weekly')"><span class="odot"></span><input type="radio" name="q1" value="weekly">Několikrát týdně</label>
+        <label class="oitem" onclick="so(this,'q1','daily')"><span class="odot"></span><input type="radio" name="q1" value="daily">Každý den — je součástí mé práce</label>
+      </div>
+      <div class="qnav">
+        <button class="qback" id="qb1" onclick="qg(-1)">← Zpět</button>
+        <span class="qct">1 / 5</span>
+        <button class="qnext" onclick="qg(1)">Dál →</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qstep" id="qs2">
+      <div class="qq">K čemu jsi AI dosud použil/a?</div>
+      <div class="qhint">Vyber vše, co sedí. Pokud jsi AI ještě nepoužil/a, přejdi dál.</div>
+      <div class="chips" id="c2">
+        <span class="chip" onclick="tc(this,'q2','text')">Psaní textů / e-mailů</span>
+        <span class="chip" onclick="tc(this,'q2','social')">Příspěvky na sítě</span>
+        <span class="chip" onclick="tc(this,'q2','research')">Vyhledávání informací</span>
+        <span class="chip" onclick="tc(this,'q2','summary')">Shrnutí dokumentů</span>
+        <span class="chip" onclick="tc(this,'q2','image')">Generování obrázků</span>
+        <span class="chip" onclick="tc(this,'q2','code')">Programování / Excel</span>
+        <span class="chip" onclick="tc(this,'q2','translate')">Překlad</span>
+        <span class="chip" onclick="tc(this,'q2','none')">Nic z toho</span>
+      </div>
+      <div class="qnav">
+        <button class="qback show" onclick="qg(-1)">← Zpět</button>
+        <span class="qct">2 / 5</span>
+        <button class="qnext" onclick="qg(1)">Dál →</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qstep" id="qs3">
+      <div class="qq">Jaká je tvoje největší obava ohledně AI?</div>
+      <div class="qhint">Vyber jednu, která tě nejlépe vystihuje.</div>
+      <div class="olist">
+        <label class="oitem" onclick="so(this,'q3','quality')"><span class="odot"></span><input type="radio" name="q3" value="quality">Kvalita — vymýšlí si, nelze věřit</label>
+        <label class="oitem" onclick="so(this,'q3','privacy')"><span class="odot"></span><input type="radio" name="q3" value="privacy">Soukromí a bezpečnost dat</label>
+        <label class="oitem" onclick="so(this,'q3','time')"><span class="odot"></span><input type="radio" name="q3" value="time">Nemám čas se to učit</label>
+        <label class="oitem" onclick="so(this,'q3','job')"><span class="odot"></span><input type="radio" name="q3" value="job">Strach, že AI nahradí lidi</label>
+        <label class="oitem" onclick="so(this,'q3','none')"><span class="odot"></span><input type="radio" name="q3" value="none">Žádná — jsem zvědavý/á</label>
+      </div>
+      <div class="qnav">
+        <button class="qback show" onclick="qg(-1)">← Zpět</button>
+        <span class="qct">3 / 5</span>
+        <button class="qnext" onclick="qg(1)">Dál →</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qstep" id="qs4">
+      <div class="qq">Co bys po workshopu chtěl/a umět?</div>
+      <div class="qhint">Vyber max. 3 priority.</div>
+      <div class="chips" id="c4">
+        <span class="chip" onclick="tc4(this,'posts')">Psát posty rychleji</span>
+        <span class="chip" onclick="tc4(this,'docs')">Zpracovávat dokumenty</span>
+        <span class="chip" onclick="tc4(this,'media')">Reagovat na média</span>
+        <span class="chip" onclick="tc4(this,'program')">Rozvíjet program</span>
+        <span class="chip" onclick="tc4(this,'speech')">Psát projevy</span>
+        <span class="chip" onclick="tc4(this,'council')">Připravit se na zastupitelstvo</span>
+        <span class="chip" onclick="tc4(this,'image')">Tvořit vizuály</span>
+        <span class="chip" onclick="tc4(this,'analyse')">Analyzovat data</span>
+      </div>
+      <div class="qnav">
+        <button class="qback show" onclick="qg(-1)">← Zpět</button>
+        <span class="qct">4 / 5</span>
+        <button class="qnext" onclick="qg(1)">Dál →</button>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qstep" id="qs5">
+      <div class="qq">Máš konkrétní situaci, kde by ti AI pomohla?</div>
+      <div class="qhint">Nepovinné — ale nejlepší workshopy se staví z vašich reálných příběhů.</div>
+      <textarea class="qta" id="q5t" placeholder="Napiš sem volně — třeba: „Trávím hodiny psaním zápisů z porad" nebo „Nevím jak reagovat na hater komentáře"…"></textarea>
+      <div class="qnav">
+        <button class="qback show" onclick="qg(-1)">← Zpět</button>
+        <span class="qct">5 / 5</span>
+        <button class="qnext" id="qsend" onclick="qsubmit()">Odeslat ✓</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="qstep" id="qsr">
+      <div style="text-align:center;padding:20px 0 28px">
+        <div style="font-size:44px;margin-bottom:14px">🎉</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--D);margin-bottom:6px">Díky za vyplnění!</div>
+        <div style="font-size:14px;color:var(--Q)">Odpovědi odeslány organizátorovi. Tady je tvůj přehled:</div>
+      </div>
+      <div class="rcard">
+        <div class="rhead">
+          <div class="ric">📊</div>
+          <div>
+            <div class="rtitle">Předworkshopový dotazník</div>
+            <div class="rsub">AI workshop · Starostové pro Liberec 2026</div>
+          </div>
+        </div>
+        <div class="rrows" id="qrrows"></div>
+        <div class="racts">
+          <button class="rcopy" onclick="qcopyres()">📋 Zkopírovat přehled</button>
+          <button class="rreset" onclick="qreset()">↺ Vyplnit znovu</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div><!-- /pg-survey -->
+
+<footer>
+  <div class="footer-logo">SLP <span>×</span> AI</div>
+  <div style="margin-bottom:10px">
+    <strong>Starostové pro Liberec</strong> · AI Workshop · 6. 6. 2026 · 17:30-19:00 · Radnice 210
+  </div>
+  Dotazy a podněty: <a href="mailto:j_podsednik@icloud.com">j_podsednik@icloud.com</a><br>
+  <div style="margin-top:10px;opacity:.5">
+    Materiály jsou interní — nesdílejte mimo tým SLP
+  </div>
+</footer>
+
+<script>
+/* ── NASTAVENÍ ──────────────────────────────────────────────────
+   Po registraci na formspree.io nahraď VLOZ_SEM_ID svým kódem.
+   Příklad: https://formspree.io/f/xyzabc12
+─────────────────────────────────────────────────────────────── */
+const FORMSPREE = 'https://formspree.io/f/xredozbr';
+
+/* ── NAVIGACE ── */
+function go(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('on'));
+  document.getElementById('pg-' + id).classList.add('on');
+  if (btn) btn.classList.add('on');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* ── KOPÍROVAT ── */
+function cp(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const o = btn.innerHTML;
+    btn.innerHTML = '✓ Zkopírováno!';
+    btn.style.color = 'var(--G)';
+    setTimeout(() => { btn.innerHTML = o; btn.style.color = ''; }, 2000);
+  });
+}
+
+/* ── PROMPTY — AKORDEON ── */
+function ptog(head) {
+  const body = head.nextElementSibling;
+  const chv = head.querySelector('.chv');
+  const wasOpen = body.classList.contains('op');
+  // Zavři ostatní
+  document.querySelectorAll('.pb.op').forEach(b => {
+    b.classList.remove('op');
+    b.previousElementSibling.querySelector('.chv').classList.remove('op');
+  });
+  if (!wasOpen) { body.classList.add('op'); chv.classList.add('op'); }
+}
+
+/* ── PROMPTY — FILTER ── */
+function pfilter(cat, btn) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  let n = 0;
+  document.querySelectorAll('.pcard').forEach(c => {
+    const cats = c.dataset.c || '';
+    const show = cat === 'all' || cats.includes(cat);
+    c.classList.toggle('hide', !show);
+    if (show) n++;
+  });
+  document.getElementById('pct').textContent = 'Zobrazuji ' + n + ' z 10 promptů';
+}
+
+/* ── QUIZ ── */
+let qc = 1;
+const ql = {
+  never:'Zatím nezkoušel/a', rare:'Párkrát zkusil/a', weekly:'Několikrát týdně', daily:'Každý den',
+  quality:'Kvalita/přesnost', privacy:'Soukromí dat', time:'Nemám čas', job:'Strach o pracovní místa', none:'Žádná obava',
+  text:'Texty/e-maily', social:'Sociální sítě', research:'Vyhledávání', summary:'Shrnutí dokumentů',
+  image:'Generování obrázků', code:'Programování/Excel', translate:'Překlad',
+  posts:'Rychlejší posty', docs:'Zpracování dok.', media:'Reakce na média',
+  program:'Volební program', speech:'Projevy', council:'Zastupitelstvo', analyse:'Analýza dat'
+};
+const qa = {q1:'', q2:[], q3:'', q4:[], q5:''};
+
+function so(el, n, v) {
+  document.querySelectorAll('[name='+n+']').forEach(r => r.closest('.oitem').classList.remove('sel'));
+  el.classList.add('sel');
+  if (n==='q1') qa.q1=v;
+  if (n==='q3') qa.q3=v;
+}
+function tc(el, g, v) {
+  if (v==='none') {
+    document.querySelectorAll('#c2 .chip').forEach(c=>c.classList.remove('sel'));
+    el.classList.toggle('sel');
+    qa.q2 = el.classList.contains('sel') ? ['none'] : [];
+    return;
+  }
+  document.querySelector('#c2 .chip:last-child').classList.remove('sel');
+  qa.q2 = qa.q2.filter(x=>x!=='none');
+  el.classList.toggle('sel');
+  if (el.classList.contains('sel')) qa.q2.push(v);
+  else qa.q2 = qa.q2.filter(x=>x!==v);
+}
+function tc4(el, v) {
+  el.classList.toggle('sel');
+  if (el.classList.contains('sel')) {
+    if (qa.q4.length >= 3) { el.classList.remove('sel'); return; }
+    qa.q4.push(v);
+  } else { qa.q4 = qa.q4.filter(x=>x!==v); }
+}
+function qg(d) {
+  const nx = qc + d;
+  if (nx < 1 || nx > 5) return;
+  document.getElementById('qs'+qc).classList.remove('on');
+  qc = nx;
+  document.getElementById('qs'+qc).classList.add('on');
+  document.getElementById('qbar').style.width = Math.round((qc/5)*100)+'%';
+}
+async function qsubmit() {
+  qa.q5 = document.getElementById('q5t').value;
+  const btn = document.getElementById('qsend');
+  const st = document.getElementById('qstatus');
+  btn.disabled = true; btn.textContent = 'Odesílám…';
+  st.className = 'qstatus sending'; st.textContent = '⏳ Odesílám odpovědi…';
+
+  const payload = {
+    '_subject': 'Dotazník AI Workshop SLP 2026',
+    'Zkušenost s AI': ql[qa.q1]||'—',
+    'Dosavadní použití': qa.q2.map(x=>ql[x]||x).join(', ')||'—',
+    'Hlavní obava': ql[qa.q3]||'—',
+    'Cíle workshopu': qa.q4.map(x=>ql[x]||x).join(', ')||'—',
+    'Konkrétní případ': qa.q5||'—'
+  };
+
+  try {
+    const r = await fetch(FORMSPREE, {
+      method:'POST',
+      headers:{'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if (!r.ok) throw new Error();
+    st.className = 'qstatus'; // skrýt
+    qshowres();
+  } catch(e) {
+    const isDemo = FORMSPREE.includes('VLOZ_SEM_ID');
+    if (isDemo) {
+      st.className = 'qstatus sending';
+      st.textContent = '⚠️ Testovací režim — Formspree není nastaveno. Výsledky nejsou odeslány e-mailem.';
+    } else {
+      st.className = 'qstatus err';
+      st.textContent = '❌ Odesílání selhalo. Zkopíruj odpovědi tlačítkem níže a pošli je e-mailem.';
+      btn.disabled=false; btn.textContent='Zkusit znovu';
+    }
+    qshowres();
+  }
+}
+function qshowres() {
+  document.getElementById('qs5').classList.remove('on');
+  document.getElementById('qsr').classList.add('on');
+  document.getElementById('qbar').style.width='100%';
+  const rows = [
+    ['Zkušenost s AI', ql[qa.q1]||'—'],
+    ['Dosavadní použití', qa.q2.map(x=>ql[x]||x).join(', ')||'—'],
+    ['Hlavní obava', ql[qa.q3]||'—'],
+    ['Cíle workshopu', qa.q4.map(x=>ql[x]||x).join(', ')||'—'],
+    ['Konkrétní případ', qa.q5||'—']
+  ];
+  document.getElementById('qrrows').innerHTML = rows.map(r=>
+    '<div class="rrow"><span class="rlabel">'+r[0]+'</span><span class="rval">'+r[1]+'</span></div>'
+  ).join('');
+}
+function qcopyres() {
+  const rows = [
+    ['Zkušenost s AI', ql[qa.q1]||'—'],
+    ['Dosavadní použití', qa.q2.map(x=>ql[x]||x).join(', ')||'—'],
+    ['Hlavní obava', ql[qa.q3]||'—'],
+    ['Cíle workshopu', qa.q4.map(x=>ql[x]||x).join(', ')||'—'],
+    ['Konkrétní případ', qa.q5||'—']
+  ];
+  const t = '=== AI Workshop SLP 2026 — Dotazník ===\n'+rows.map(r=>r[0]+': '+r[1]).join('\n');
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.querySelector('.rcopy');
+    b.textContent='✓ Zkopírováno!';
+    setTimeout(()=>{ b.textContent='📋 Zkopírovat přehled'; },2000);
+  });
+}
+function qreset() {
+  qc=1; qa.q1=''; qa.q2=[]; qa.q3=''; qa.q4=[]; qa.q5='';
+  document.querySelectorAll('.oitem').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('q5t').value='';
+  const btn=document.getElementById('qsend'); btn.disabled=false; btn.textContent='Odeslat ✓';
+  document.getElementById('qstatus').className='qstatus';
+  document.getElementById('qsr').classList.remove('on');
+  document.getElementById('qs1').classList.add('on');
+  document.getElementById('qbar').style.width='20%';
+}
+</script>
+</body>
+</html>
