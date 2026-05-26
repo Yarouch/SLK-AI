@@ -390,6 +390,10 @@ footer a:hover{color:#fff}
 .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
 .seclabel{font-size:10.5px;font-weight:700;letter-spacing:.09em;color:var(--Q);text-transform:uppercase;margin:1.5rem 0 .75rem}
 
+/* ── UTILS (chyběly) ── */
+.seclabel{font-size:10.5px;font-weight:700;letter-spacing:.09em;color:var(--Q);text-transform:uppercase;margin:0 0 .75rem}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+
 @media(max-width:540px){
   .cmp{grid-template-columns:1fr}
   .nav-pill{padding:0 10px;font-size:11.5px}
@@ -407,10 +411,10 @@ footer a:hover{color:#fff}
 <!-- NAV -->
 <nav id="topnav">
   <div class="nav-brand">SLP <span>×</span> AI</div>
-  <button class="nav-pill on" onclick="go('home',this)">🏠 Úvod</button>
-  <button class="nav-pill" onclick="go('learn',this)">📖 Jak promptovat</button>
-  <button class="nav-pill" onclick="go('prompts',this)">⚡ <span class="npnum">10</span> promptů</button>
-  <button class="nav-pill" onclick="go('survey',this)">📋 Dotazník</button>
+  <button class="nav-pill on" data-page="home" onclick="go('home',this)">🏠 Úvod</button>
+  <button class="nav-pill" data-page="learn" onclick="go('learn',this)">📖 Jak promptovat</button>
+  <button class="nav-pill" data-page="prompts" onclick="go('prompts',this)">⚡ <span class="npnum">10</span> promptů</button>
+  <button class="nav-pill" data-page="survey" onclick="go('survey',this)">📋 Dotazník</button>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════ -->
@@ -424,25 +428,25 @@ footer a:hover{color:#fff}
   <h1>AI pro<br><em>komunální politiku</em></h1>
   <p class="hero-sub">Kompletní kurz pro tým Starostové pro Liberec. 15 minut samostudia, 10 promptů ke stažení, dotazník před workshopem.</p>
   <div class="hero-actions">
-    <button class="btn-hero primary" onclick="go('learn',document.querySelectorAll('.nav-pill')[1])">Začít kurz →</button>
-    <button class="btn-hero ghost" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">Vyplnit dotazník</button>
+    <button class="btn-hero primary" onclick="go('learn', document.querySelector('.nav-pill[data-page=learn]'))">Začít kurz →</button>
+    <button class="btn-hero ghost" onclick="go('survey', document.querySelector('.nav-pill[data-page=survey]'))">Vyplnit dotazník</button>
   </div>
 </div>
 
 <div class="overview">
-  <div class="ov-card" onclick="go('learn',document.querySelectorAll('.nav-pill')[1])">
+  <div class="ov-card" onclick="go('learn', document.querySelector('.nav-pill[data-page=learn]'))">
     <div class="ov-num">1</div>
     <h3>Jak promptovat</h3>
     <p>Úvod pro začátečníky, 4 pravidla a 3 praktická cvičení</p>
     <div class="ov-badge">⏱ 15 minut</div>
   </div>
-  <div class="ov-card" onclick="go('prompts',document.querySelectorAll('.nav-pill')[2])">
+  <div class="ov-card" onclick="go('prompts', document.querySelector('.nav-pill[data-page=prompts]'))">
     <div class="ov-num">2</div>
     <h3>10 promptů</h3>
     <p>Hotové šablony pro kampaň, zastupitelstvo, program i krizovku</p>
     <div class="ov-badge">📋 Kopírovat a použít</div>
   </div>
-  <div class="ov-card" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">
+  <div class="ov-card" onclick="go('survey', document.querySelector('.nav-pill[data-page=survey]'))">
     <div class="ov-num">3</div>
     <h3>Dotazník</h3>
     <p>5 otázek před workshopem — pomůže přizpůsobit program</p>
@@ -567,7 +571,7 @@ Proč kandiduji: <span class="blank">[jedna věta]</span>
 
 Pravidla: max 60 slov, první osoba, teplý tón, bez fráze „angažovaný" nebo „zodpovědný".</div>
       <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
-      <button class="tbtn sec" onclick="cp(this,'Jsi volební copywriter. Napiš krátký medailonek kandidáta pro Facebook.\n\nJméno: [tvoje jméno]\nProfese: [co děláš]\nProč kandiduji: [jedna věta]\n\nPravidla: max 60 slov, první osoba, teplý tón, bez fráze „angažovaný" nebo „zodpovědný".')">📋 Kopírovat prompt</button>
+      <button class="tbtn sec" onclick="cp(this,'t1')">📋 Kopírovat prompt</button>
     </div>
 
     <div class="task">
@@ -580,7 +584,7 @@ Text: <span class="blank">[vlož odstavec z programu nebo dokumentu]</span>
 
 Výstup: max 3 věty. První věta říká, co z toho má občan Liberce. Poslední věta musí být pozitivní.</div>
       <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
-      <button class="tbtn sec" onclick="cp(this,'Přepiš tento text tak, aby mu rozuměl každý — rodič, živnostník, senior. Žádný úřednický jazyk.\n\nText: [vlož odstavec z programu nebo dokumentu]\n\nVýstup: max 3 věty. První věta říká, co z toho má občan Liberce. Poslední věta musí být pozitivní.')">📋 Kopírovat prompt</button>
+      <button class="tbtn sec" onclick="cp(this,'t2')">📋 Kopírovat prompt</button>
     </div>
 
     <div class="task">
@@ -593,7 +597,7 @@ Výstup: max 3 věty. První věta říká, co z toho má občan Liberce. Posled
 
 Napiš 3 kritické komentáře, které by takový člověk napsal na Facebook. Buď realistický, ne hysterický.</div>
       <a class="tbtn" href="https://claude.ai" target="_blank" rel="noopener">Otevřít Claude →</a>
-      <button class="tbtn sec" onclick="cp(this,'Jsi skeptický liberecký volič, 55 let, řidič autobusu. Přečetl sis tento programový bod:\n\n[vlož jeden programový bod SLP]\n\nNapiš 3 kritické komentáře, které by takový člověk napsal na Facebook. Buď realistický, ne hysterický.')">📋 Kopírovat prompt</button>
+      <button class="tbtn sec" onclick="cp(this,'t3')">📋 Kopírovat prompt</button>
     </div>
 
     <div class="co tip">
@@ -601,7 +605,7 @@ Napiš 3 kritické komentáře, které by takový člověk napsal na Facebook. B
       <div>Hotovo? Na workshopu tě čeká live demo — příprava na zastupitelstvo, skript pro Reels i krizová komunikace. Mrkni mezitím na záložku <strong>10 promptů</strong>.</div>
     </div>
     <div style="text-align:center;margin-top:28px">
-      <button class="btn-hero primary" onclick="go('prompts',document.querySelectorAll('.nav-pill')[2])">Přejít na 10 promptů →</button>
+      <button class="btn-hero primary" onclick="go('prompts', document.querySelector('.nav-pill[data-page=prompts]'))">Přejít na 10 promptů →</button>
     </div>
   </div>
 </div>
@@ -651,7 +655,7 @@ Tón: přátelský, důvěryhodný. Nepoužívej slova: angažovaný, zodpovědn
       <div class="phintbox">💡 Přidej „Nepoužívej:" — AI se slovům vyhne a texty budou čerstvější.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 1 proměnnou</span>
-        <button class="copybtn" onclick="cp(this,'Jsi zkušený volební copywriter. Napiš medailonek kandidáta ve 3 verzích:\n— Facebook post (max 80 slov, teplý tón, první osoba)\n— Text na leták (max 50 slov, třetí osoba, důraz na přínos pro město)\n— Bio na web (max 120 slov, profesionální, zmíň klíčové zkušenosti)\n\nPodklady:\n[Jméno, profese, věk, proč kandiduje, co chce změnit, osobní příběh]\n\nTón: přátelský, důvěryhodný. Nepoužívej slova: angažovaný, zodpovědný, transparentní.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p1')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -683,7 +687,7 @@ Střídej edukaci, příběh a výzvu k akci.</div>
       <div class="phintbox">💡 Řekni AI, co jsi zveřejnil minulý týden — dostaneš různorodější mix bez opakování.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 2 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Jsi social media manažer komunální volební kampaně. Vytvoř obsahový plán na 7 dní pro Starostové pro Liberec.\n\nTéma týdne: [Školství / Doprava / Bezpečnost / jiné]\nHlavní sdělení: [klíčový slogan nebo příslib kampaně]\n\nPro každý den navrhni:\n— Typ příspěvku (foto, video, text, story, reel)\n— Headline (max 10 slov)\n— Caption (max 150 slov)\n— Hashtags (max 5, lokální + tematické)\n— Doporučený čas zveřejnění\n\nStřídej edukaci, příběh a výzvu k akci.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p2')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -714,7 +718,7 @@ Každá max 3 věty. Žádný útok na autora.</div>
       <div class="phintbox">💡 Vždy uprav výsledek vlastními slovy — AI dá strukturu, ty dodáš autenticitu.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 2 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Jsi expert na krizovou komunikaci v komunální politice. Pomoz mi reagovat na tento koment:\n\n[Vlož sem doslova koment, tweet nebo zprávu z médií]\n\nKontext: Jsem kandidát za Starostové pro Liberec, téma se týká [oblast: doprava / školy / rozpočet…].\n\nNavrhni 3 různé odpovědi:\n1. Věcná — fakta, bez emocí, krátce\n2. Empatická — uznám legitimní obavy, nabídnu řešení\n3. Sebevědomá — držím pozici, neomluvám se\n\nKaždá max 3 věty. Žádný útok na autora.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p3')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -746,7 +750,7 @@ Piš jasně, bez úřednického jazyka. Vše na max 1 stranu A4.</div>
       <div class="phintbox">💡 Funguje nejlépe s naskenovaným PDF nebo zkopírovaným textem — Claude si poradí i s tabulkami.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 1 proměnnou</span>
-        <button class="copybtn" onclick="cp(this,'Jsi analytik zastupitelstva města Liberec. Prostuduj přiložený materiál a připrav stručný briefing.\n\n[Vlož nebo nahraj text podkladového materiálu]\n\nStrukturuj výstup takto:\n1. O čem se hlasuje (max 3 věty)\n2. Finanční dopady (pokud jsou)\n3. Rizika a otevřené otázky\n4. Argumenty PRO schválení\n5. Argumenty PROTI schválení\n6. Pět konkrétních otázek, které bych měl jako zastupitel položit\n\nPiš jasně, bez úřednického jazyka. Vše na max 1 stranu A4.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p4')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -778,7 +782,7 @@ Navrhni také headline (max 8 slov) pro nadpis letáku.</div>
       <div class="phintbox">💡 Nech napsat 3 varianty — pak vyber tu, která nejlépe sedí tvé cílové skupině voličů.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 1 proměnnou</span>
-        <button class="copybtn" onclick="cp(this,'Jsi politický komunikátor. Přepiš tento programový text tak, aby byl srozumitelný pro každého voliče — rodiče, živnostníka nebo seniora.\n\nPůvodní text:\n[Vlož odstavec z programu]\n\nPravidla:\n— Max 4 věty\n— Žádný žargon\n— Konkrétní přínos pro obyvatele Liberce v první větě\n— Zakončit větou vzbuzující naději nebo motivující k akci\n— Tón: přátelský, kompetentní\n\nNavrhni také headline (max 8 slov) pro nadpis letáku.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p5')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -812,7 +816,7 @@ Buď neutrální analytik.</div>
       <div class="phintbox">💡 Výsledek použij jako přípravu kandidáta na TV nebo novinářský rozhovor.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 3 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Jsi politický analytik. Srovnej tyto dva volební programy a identifikuj strategicky důležité rozdíly.\n\nProgram SLP:\n[Vlož klíčové body programu SLP]\n\nProgram [název soupeře]:\n[Vlož klíčové body programu soupeře]\n\nVýstup:\n1. Kde se programy shodují (3–5 bodů)\n2. Klíčové rozdíly — kde SLP nabízí víc nebo jinak\n3. Témata, která soupeř má a SLP ne — slabiny nebo příležitosti?\n4. Jedno sdělení (max 2 věty) pro použití v debatě jako diferenciátor\n\nBuď neutrální analytik.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p6')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -844,7 +848,7 @@ Přidej poznámky pro kameru: kde kandidát stojí, co dělá, co ukazuje.</div>
       <div class="phintbox">💡 Nejsilnější videa začínají venku — u problémového místa, školy, zastávky.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 3 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Napiš skript pro 60sekundové volební video pro sociální sítě.\n\nKandidát: [Jméno, pár slov]\nTéma: [konkrétní problém nebo příslib]\nCílová skupina: [rodiče / mladí / senioři / podnikatelé]\n\nStruktura:\n— Hák (0–5 s): jedna provokativní otázka nebo překvapivý fakt\n— Problém (5–20 s): co konkrétně nefunguje dnes v Liberci\n— Řešení (20–45 s): co kandidát udělá — konkrétně a jednoduše\n— Výzva (45–60 s): proč volit a jak\n\nPřidej poznámky pro kameru: kde kandidát stojí, co dělá, co ukazuje.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p7')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -877,7 +881,7 @@ Tón: klidný, věcný, konstruktivní. Bez útoků.</div>
       <div class="phintbox">💡 Citát vždy přepiš vlastními slovy — novináři poznají, zda ho psal člověk nebo AI.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 3 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Jsi tiskový mluvčí komunální strany. Napiš tiskovou zprávu nebo vyjádření pro média.\n\nSituace: [Co se stalo nebo jaké téma komunikujeme]\nPostoj SLP: [Naše pozice v 1–2 větách]\nKontakt: [Jméno, funkce, telefon]\n\nFormát:\n— Titulek (věcný, max 12 slov)\n— Perex (co, kde, kdy, proč — 2 věty)\n— Tělo (fakta → naše reakce → co uděláme)\n— Citát zastupitele/kandidáta (1–2 věty, přímá řeč)\n— Kontakt na mluvčího\n\nTón: klidný, věcný, konstruktivní. Bez útoků.')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p8')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -908,7 +912,7 @@ Výstup:
       <div class="phintbox">💡 Bod 5 — příběh pro Janu — je nejcennější část. Právě tato forma komunikace rozhoduje volby.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 1 proměnnou</span>
-        <button class="copybtn" onclick="cp(this,'Jsi senior poradce komunální politiky. Rozviň tento záměr do konkrétního realizovatelného návrhu.\n\nZáměr: [Stručně popiš myšlenku]\nMěsto: Liberec (cca 104 000 obyvatel, krajské město)\nVolební období: 4 roky (2026–2030)\n\nVýstup:\n1. Problém, který řešíme — 2 věty s čísly\n2. Konkrétní kroky (co, kdo, kdy)\n3. Odhadované náklady a možné zdroje (dotace, rozpočet, partneři)\n4. Měřitelný výsledek do roku 2030\n5. Příběh pro kampaň — jak to vysvětlit voličce Janě (38 let, maminka, Liberec-Rochlice)')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p9')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
@@ -938,13 +942,13 @@ Výstup:
       <div class="phintbox">💡 Nech AI hrát nepřátelského novináře a procvičuj odpovědi nahlas — skutečný rozhovor bude snazší.</div>
       <div class="pcopy-row mt8">
         <span class="phint">✏️ Doplň 3 proměnné</span>
-        <button class="copybtn" onclick="cp(this,'Jsi mediální trenér s 20 lety zkušeností. Připrav mě na rozhovor pro lokální média.\n\nTéma rozhovoru: [Co bude novinář pravděpodobně řešit]\nSilné stránky SLP v tomto tématu: [Co víme, co jsme udělali, co slibujeme]\nCitlivá místa: [Co by mě mohlo zaskočit]\n\nVýstup:\n1. 7 nejpravděpodobnějších otázek — včetně 3 nepříjemných\n2. Doporučená odpověď na každou (max 3 věty, jasně)\n3. Bridging fráze — 3 způsoby, jak přejít od těžké otázky k mému sdělení\n4. Message of the day (1 věta) — zopakuji ji 3× bez ohledu na otázku')">📋 Kopírovat</button>
+        <button class="copybtn" onclick="cp(this,'p10')">📋 Kopírovat</button>
       </div>
     </div>
   </div>
 
   <div style="text-align:center;margin:32px 0">
-    <button class="btn-hero primary" onclick="go('survey',document.querySelectorAll('.nav-pill')[3])">Přejít na dotazník →</button>
+    <button class="btn-hero primary" onclick="go('survey', document.querySelector('.nav-pill[data-page=survey]'))">Přejít na dotazník →</button>
   </div>
 </div>
 </div><!-- /pg-prompts -->
@@ -1094,28 +1098,206 @@ Výstup:
 
 <script>
 /* ── NASTAVENÍ ──────────────────────────────────────────────────
-   Po registraci na formspree.io nahraď VLOZ_SEM_ID svým kódem.
-   Příklad: https://formspree.io/f/xyzabc12
+   Po registraci na formspree.io nahraď kód svým endpoint ID.
 ─────────────────────────────────────────────────────────────── */
 const FORMSPREE = 'https://formspree.io/f/xredozbr';
 
-/* ── NAVIGACE ── */
+/* ── TEXTY PROMPTŮ (FIX: mimo HTML atributy, žádné problémy s uvozovkami) ── */
+const PROMPTS = {
+  t1: `Jsi volební copywriter. Napiš krátký medailonek kandidáta pro Facebook.
+
+Jméno: [tvoje jméno]
+Profese: [co děláš]
+Proč kandiduji: [jedna věta]
+
+Pravidla: max 60 slov, první osoba, teplý tón, bez fráze „angažovaný" nebo „zodpovědný".`,
+
+  t2: `Přepiš tento text tak, aby mu rozuměl každý — rodič, živnostník, senior. Žádný úřednický jazyk.
+
+Text: [vlož odstavec z programu nebo dokumentu]
+
+Výstup: max 3 věty. První věta říká, co z toho má občan Liberce. Poslední věta musí být pozitivní.`,
+
+  t3: `Jsi skeptický liberecký volič, 55 let, řidič autobusu. Přečetl sis tento programový bod:
+
+[vlož jeden programový bod SLP]
+
+Napiš 3 kritické komentáře, které by takový člověk napsal na Facebook. Buď realistický, ne hysterický.`,
+
+  p1: `Jsi zkušený volební copywriter. Napiš medailonek kandidáta ve 3 verzích:
+— Facebook post (max 80 slov, teplý tón, první osoba)
+— Text na leták (max 50 slov, třetí osoba, důraz na přínos pro město)
+— Bio na web (max 120 slov, profesionální, zmíň klíčové zkušenosti)
+
+Podklady:
+[Jméno, profese, věk, proč kandiduje, co chce změnit, osobní příběh]
+
+Tón: přátelský, důvěryhodný. Nepoužívej slova: angažovaný, zodpovědný, transparentní.`,
+
+  p2: `Jsi social media manažer komunální volební kampaně. Vytvoř obsahový plán na 7 dní pro Starostové pro Liberec.
+
+Téma týdne: [Školství / Doprava / Bezpečnost / jiné]
+Hlavní sdělení: [klíčový slogan nebo příslib kampaně]
+
+Pro každý den navrhni:
+— Typ příspěvku (foto, video, text, story, reel)
+— Headline (max 10 slov)
+— Caption (max 150 slov)
+— Hashtags (max 5, lokální + tematické)
+— Doporučený čas zveřejnění
+
+Střídej edukaci, příběh a výzvu k akci.`,
+
+  p3: `Jsi expert na krizovou komunikaci v komunální politice. Pomoz mi reagovat na tento koment:
+
+[Vlož sem doslova koment, tweet nebo zprávu z médií]
+
+Kontext: Jsem kandidát za Starostové pro Liberec, téma se týká [oblast: doprava / školy / rozpočet…].
+
+Navrhni 3 různé odpovědi:
+1. Věcná — fakta, bez emocí, krátce
+2. Empatická — uznám legitimní obavy, nabídnu řešení
+3. Sebevědomá — držím pozici, neomluvám se
+
+Každá max 3 věty. Žádný útok na autora.`,
+
+  p4: `Jsi analytik zastupitelstva města Liberec. Prostuduj přiložený materiál a připrav stručný briefing.
+
+[Vlož nebo nahraj text podkladového materiálu]
+
+Strukturuj výstup takto:
+1. O čem se hlasuje (max 3 věty)
+2. Finanční dopady (pokud jsou)
+3. Rizika a otevřené otázky
+4. Argumenty PRO schválení
+5. Argumenty PROTI schválení
+6. Pět konkrétních otázek, které bych měl jako zastupitel položit
+
+Piš jasně, bez úřednického jazyka. Vše na max 1 stranu A4.`,
+
+  p5: `Jsi politický komunikátor. Přepiš tento programový text tak, aby byl srozumitelný pro každého voliče — rodiče, živnostníka nebo seniora.
+
+Původní text:
+[Vlož odstavec z programu]
+
+Pravidla:
+— Max 4 věty
+— Žádný žargon
+— Konkrétní přínos pro obyvatele Liberce v první větě
+— Zakončit větou vzbuzující naději nebo motivující k akci
+— Tón: přátelský, kompetentní
+
+Navrhni také headline (max 8 slov) pro nadpis letáku.`,
+
+  p6: `Jsi politický analytik. Srovnej tyto dva volební programy a identifikuj strategicky důležité rozdíly.
+
+Program SLP:
+[Vlož klíčové body programu SLP]
+
+Program [název soupeře]:
+[Vlož klíčové body programu soupeře]
+
+Výstup:
+1. Kde se programy shodují (3–5 bodů)
+2. Klíčové rozdíly — kde SLP nabízí víc nebo jinak
+3. Témata, která soupeř má a SLP ne — slabiny nebo příležitosti?
+4. Jedno sdělení (max 2 věty) pro použití v debatě jako diferenciátor
+
+Buď neutrální analytik.`,
+
+  p7: `Napiš skript pro 60sekundové volební video pro sociální sítě.
+
+Kandidát: [Jméno, pár slov]
+Téma: [konkrétní problém nebo příslib, např. „parkovací domy v centru"]
+Cílová skupina: [rodiče / mladí / senioři / podnikatelé]
+
+Struktura:
+— Hák (0–5 s): jedna provokativní otázka nebo překvapivý fakt
+— Problém (5–20 s): co konkrétně nefunguje dnes v Liberci
+— Řešení (20–45 s): co kandidát udělá — konkrétně a jednoduše
+— Výzva (45–60 s): proč volit a jak
+
+Přidej poznámky pro kameru: kde kandidát stojí, co dělá, co ukazuje.`,
+
+  p8: `Jsi tiskový mluvčí komunální strany. Napiš tiskovou zprávu nebo vyjádření pro média.
+
+Situace: [Co se stalo nebo jaké téma komunikujeme]
+Postoj SLP: [Naše pozice v 1–2 větách]
+Kontakt: [Jméno, funkce, telefon]
+
+Formát:
+— Titulek (věcný, max 12 slov)
+— Perex (co, kde, kdy, proč — 2 věty)
+— Tělo (fakta → naše reakce → co uděláme)
+— Citát zastupitele/kandidáta (1–2 věty, přímá řeč)
+— Kontakt na mluvčího
+
+Tón: klidný, věcný, konstruktivní. Bez útoků.`,
+
+  p9: `Jsi senior poradce komunální politiky. Rozviň tento záměr do konkrétního realizovatelného návrhu.
+
+Záměr: [Stručně popiš myšlenku]
+Město: Liberec (cca 104 000 obyvatel, krajské město)
+Volební období: 4 roky (2026–2030)
+
+Výstup:
+1. Problém, který řešíme — 2 věty s čísly
+2. Konkrétní kroky (co, kdo, kdy)
+3. Odhadované náklady a možné zdroje (dotace, rozpočet, partneři)
+4. Měřitelný výsledek do roku 2030
+5. Příběh pro kampaň — jak to vysvětlit voličce Janě (38 let, maminka, Liberec-Rochlice)`,
+
+  p10: `Jsi mediální trenér s 20 lety zkušeností. Připrav mě na rozhovor pro lokální média.
+
+Téma rozhovoru: [Co bude novinář pravděpodobně řešit]
+Silné stránky SLP v tomto tématu: [Co víme, co jsme udělali, co slibujeme]
+Citlivá místa: [Co by mě mohlo zaskočit]
+
+Výstup:
+1. 7 nejpravděpodobnějších otázek — včetně 3 nepříjemných
+2. Doporučená odpověď na každou (max 3 věty, jasně)
+3. Bridging fráze — 3 způsoby, jak přejít od těžké otázky k mému sdělení
+4. Message of the day (1 věta) — zopakuji ji 3× bez ohledu na otázku`
+};
+
+/* ── NAVIGACE (FIX: robustní hledání záložky podle ID, ne indexu) ── */
 function go(id, btn) {
   document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('on'));
   document.getElementById('pg-' + id).classList.add('on');
-  if (btn) btn.classList.add('on');
+  if (btn) {
+    btn.classList.add('on');
+  } else {
+    const found = document.querySelector('.nav-pill[data-page="' + id + '"]');
+    if (found) found.classList.add('on');
+  }
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* ── KOPÍROVAT ── */
-function cp(btn, text) {
-  navigator.clipboard.writeText(text).then(() => {
+/* ── KOPÍROVAT (FIX: přijímá ID nebo text, má fallback pro starší prohlížeče) ── */
+function cp(btn, idOrText) {
+  const text = PROMPTS[idOrText] !== undefined ? PROMPTS[idOrText] : idOrText;
+  const doConfirm = () => {
     const o = btn.innerHTML;
     btn.innerHTML = '✓ Zkopírováno!';
     btn.style.color = 'var(--G)';
     setTimeout(() => { btn.innerHTML = o; btn.style.color = ''; }, 2000);
-  });
+  };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); doConfirm(); }
+    catch(e) { alert('Zkopíruj ručně:\n\n' + text.substring(0, 120) + '…'); }
+    document.body.removeChild(ta);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(doConfirm).catch(fallback);
+  } else {
+    fallback();
+  }
 }
 
 /* ── PROMPTY — AKORDEON ── */
